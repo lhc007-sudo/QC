@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>故障排查 &mdash; Tang 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f115507d"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=540d3cec"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="构建与发布文档" href="build-and-release.html" />
+    <link rel="prev" title="任务识别与路由" href="task-routing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #123a67" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Tang
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">系统与维护</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">系统架构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id2">为什么采用双层结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#id3">任务目录</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="task-routing.html">任务识别与路由</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="task-routing.html#id2">路由表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-routing.html#id3">手动自检</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">故障排查</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">找不到发行版</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wsl">WSL 启动超时</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pygamd-cuda">PYGAMD 显示 CUDA 不可用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nvidia-smi-pygamd">NVIDIA-SMI 可用但 PYGAMD 失败</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">计算失败</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">中文乱码</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build-and-release.html">构建与发布文档</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build-and-release.html#id2">本地生成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-and-release.html#read-the-docs">发布到 Read the Docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-and-release.html#github-pages">发布到 GitHub Pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-and-release.html#id3">文档维护</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单"  style="background: #123a67" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Tang</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">故障排查</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/reference/troubleshooting.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>故障排查<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
+<section id="id2">
+<h2>找不到发行版<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
+<p>运行：</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="n">-l</span> <span class="n">-v</span>
+</pre></div>
+</div>
+<p>把 GUI 顶部“计算环境”改为列表中的准确名称。<code class="docutils literal notranslate"><span class="pre">Ubuntu</span></code>、<code class="docutils literal notranslate"><span class="pre">Ubuntu-22.04</span></code> 和 <code class="docutils literal notranslate"><span class="pre">TangQC</span></code> 是不同的发行版。</p>
+</section>
+<section id="wsl">
+<h2>WSL 启动超时<a class="headerlink" href="#wsl" title="链接到此标题。"></a></h2>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="p">-</span><span class="n">-shutdown</span>
+<span class="n">wsl</span> <span class="p">-</span><span class="n">-update</span>
+</pre></div>
+</div>
+<p>重启 Windows 后再试。如果仍然出现 <code class="docutils literal notranslate"><span class="pre">HCS_E_CONNECTION_TIMEOUT</span></code>，检查虚拟化是否启用、WSL 服务状态和系统更新。</p>
+</section>
+<section id="pygamd-cuda">
+<h2>PYGAMD 显示 CUDA 不可用<a class="headerlink" href="#pygamd-cuda" title="链接到此标题。"></a></h2>
+<p>依次检查：</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="n">-d</span> <span class="n">TangQC</span> <span class="n">-u</span> <span class="n">root</span> <span class="p">--</span> <span class="nb">ls </span><span class="n">-l</span> <span class="p">/</span><span class="n">dev</span><span class="p">/</span><span class="n">dxg</span>
+<span class="n">wsl</span> <span class="n">-d</span> <span class="n">TangQC</span> <span class="n">-u</span> <span class="n">root</span> <span class="p">--</span> <span class="nb">ls </span><span class="n">-l</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">wsl</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">libcuda</span><span class="p">.</span><span class="n">so</span><span class="p">.</span><span class="n">1</span>
+<span class="n">wsl</span> <span class="n">-d</span> <span class="n">TangQC</span> <span class="n">-u</span> <span class="n">root</span> <span class="p">--</span> <span class="p">/</span><span class="n">usr</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">wsl</span><span class="p">/</span><span class="n">lib</span><span class="p">/</span><span class="n">nvidia-smi</span>
+</pre></div>
+</div>
+<p>这些路径由 WSL 启动时注入。缺少它们通常不是 rootfs 打包问题，而是新电脑没有正确安装 WSL2 或支持 WSL 的 NVIDIA Windows 驱动。</p>
+</section>
+<section id="nvidia-smi-pygamd">
+<h2>NVIDIA-SMI 可用但 PYGAMD 失败<a class="headerlink" href="#nvidia-smi-pygamd" title="链接到此标题。"></a></h2>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="n">-d</span> <span class="n">TangQC</span> <span class="n">-u</span> <span class="n">root</span> <span class="p">--</span> <span class="n">pygamd-python</span> <span class="n">-c</span> <span class="s2">&quot;from numba import cuda; print(cuda.is_available())&quot;</span>
+</pre></div>
+</div>
+<p>若输出为 <code class="docutils literal notranslate"><span class="pre">False</span></code>，检查 <code class="docutils literal notranslate"><span class="pre">/usr/local/bin/pygamd-python</span></code> 是否设置：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/lib/wsl/lib
+<span class="nv">NUMBA_CUDA_DRIVER</span><span class="o">=</span>/usr/lib/wsl/lib/libcuda.so.1
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>计算失败<a class="headerlink" href="#id3" title="链接到此标题。"></a></h2>
+<p>打开结果目录中的 <code class="docutils literal notranslate"><span class="pre">run.log</span></code> 和 <code class="docutils literal notranslate"><span class="pre">result.json</span></code>。先查看 <code class="docutils literal notranslate"><span class="pre">return_code</span></code>，再从日志末尾向上定位第一条明确错误。GUI 弹出的“计算失败”只是汇总提示，具体原因以日志为准。</p>
+</section>
+<section id="id4">
+<h2>中文乱码<a class="headerlink" href="#id4" title="链接到此标题。"></a></h2>
+<p>网页源文件统一保存为 UTF-8。GUI 使用中文时，Windows 建议选择“Microsoft YaHei UI”；Linux GUI 需要安装 Noto CJK 字体。字体缺失与字符串被写成 <code class="docutils literal notranslate"><span class="pre">\\uXXXX</span></code> 文本是两类不同问题。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="task-routing.html" class="btn btn-neutral float-left" title="任务识别与路由" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="build-and-release.html" class="btn btn-neutral float-right" title="构建与发布文档" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, Tang developers。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
